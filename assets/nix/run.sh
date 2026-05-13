@@ -31,25 +31,6 @@ boot_config_override=
 # USE THIS ONLY WHEN ASKED TO OR YOU KNOW WHAT THIS MEANS
 ignore_disable_switch="0"
 
-# Mono Options
-
-# Overrides default Mono DLL search path
-# Sometimes it is needed to instruct Mono to seek its assemblies from a different path
-# (e.g. mscorlib is stripped in original game)
-# This option causes Mono to seek mscorlib and core libraries from a different folder before Managed
-# Original Managed folder is added as a secondary folder in the search path
-# To specify multiple paths, separate them with colons (:)
-dll_search_path_override=""
-
-# If 1, Mono debugger server will be enabled
-debug_enable="0"
-
-# When debug_enabled is 1, specifies the address to use for the debugger server
-debug_address="127.0.0.1:10000"
-
-# If 1 and debug_enabled is 1, Mono debugger server will suspend the game execution until a debugger is attached
-debug_suspend="0"
-
 # CoreCLR options (IL2CPP)
 
 # Path to coreclr shared library WITHOUT THE EXTENSION that contains the CoreCLR runtime
@@ -115,7 +96,7 @@ abs_path() {
     echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 }
 
-# Set executable path and the extension to use for the libdoorstop shared object as well as check whether we're running on Apple Silicon
+# Set executable path and the extension to use for the libgodotdoorstop shared object as well as check whether we're running on Apple Silicon
 os_type="$(uname -s)"
 case ${os_type} in
     Linux*)
@@ -295,16 +276,12 @@ export DOORSTOP_ENABLED="$enabled"
 export DOORSTOP_TARGET_ASSEMBLY="$target_assembly"
 export DOORSTOP_BOOT_CONFIG_OVERRIDE="$boot_config_override"
 export DOORSTOP_IGNORE_DISABLED_ENV="$ignore_disable_switch"
-export DOORSTOP_MONO_DLL_SEARCH_PATH_OVERRIDE="$dll_search_path_override"
-export DOORSTOP_MONO_DEBUG_ENABLED="$debug_enable"
-export DOORSTOP_MONO_DEBUG_ADDRESS="$debug_address"
-export DOORSTOP_MONO_DEBUG_SUSPEND="$debug_suspend"
 export DOORSTOP_CLR_RUNTIME_CORECLR_PATH="$coreclr_path.$lib_extension"
 export DOORSTOP_CLR_CORLIB_DIR="$corlib_dir"
 
 # Final setup
 doorstop_directory="${BASEDIR}/"
-doorstop_name="libdoorstop.${lib_extension}"
+doorstop_name="libgodotdoorstop.${lib_extension}"
 
 export LD_LIBRARY_PATH="${doorstop_directory}:${corlib_dir}:${LD_LIBRARY_PATH}"
 if [ -z "$LD_PRELOAD" ]; then

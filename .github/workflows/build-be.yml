@@ -18,33 +18,33 @@ jobs:
       - name: Build Release
         run: |
           ./build.ps1
-          Copy-Item -Path ./build/windows/x64/release/doorstop.dll -Destination ./artifacts/release/x64/winhttp.dll
-          Copy-Item -Path ./build/windows/x64/release/.doorstop_version -Destination ./artifacts/release/x64/.doorstop_version
-          Copy-Item -Path ./build/windows/x86/release/doorstop.dll -Destination ./artifacts/release/x86/winhttp.dll
-          Copy-Item -Path ./build/windows/x86/release/.doorstop_version -Destination ./artifacts/release/x86/.doorstop_version
-          Copy-Item -Path ./assets/windows/doorstop_config.ini -Destination ./artifacts/release/x64/doorstop_config.ini
-          Copy-Item -Path ./assets/windows/doorstop_config.ini -Destination ./artifacts/release/x86/doorstop_config.ini
+          Copy-Item -Path ./build/windows/x64/release/godot_doorstop.dll -Destination ./artifacts/release/x64/winhttp.dll
+          Copy-Item -Path ./build/windows/x64/release/.godot_doorstop_version -Destination ./artifacts/release/x64/.godot_doorstop_version
+          Copy-Item -Path ./build/windows/x86/release/godot_doorstop.dll -Destination ./artifacts/release/x86/winhttp.dll
+          Copy-Item -Path ./build/windows/x86/release/.godot_doorstop_version -Destination ./artifacts/release/x86/.godot_doorstop_version
+          Copy-Item -Path ./assets/windows/godot_doorstop_config.ini -Destination ./artifacts/release/x64/godot_doorstop_config.ini
+          Copy-Item -Path ./assets/windows/godot_doorstop_config.ini -Destination ./artifacts/release/x86/godot_doorstop_config.ini
           Copy-Item -Path ./LICENSE -Destination ./artifacts/release/LICENSE
       - name: Build Verbose
         run: |
           ./build.ps1 -with_logging
-          Copy-Item -Path ./build/windows/x64/release/doorstop.dll -Destination ./artifacts/verbose/x64/winhttp.dll
-          Copy-Item -Path ./build/windows/x64/release/.doorstop_version -Destination ./artifacts/verbose/x64/.doorstop_version
-          Copy-Item -Path ./build/windows/x86/release/doorstop.dll -Destination ./artifacts/verbose/x86/winhttp.dll
-          Copy-Item -Path ./build/windows/x86/release/.doorstop_version -Destination ./artifacts/verbose/x86/.doorstop_version
-          Copy-Item -Path ./assets/windows/doorstop_config.ini -Destination ./artifacts/verbose/x64/doorstop_config.ini
-          Copy-Item -Path ./assets/windows/doorstop_config.ini -Destination ./artifacts/verbose/x86/doorstop_config.ini
+          Copy-Item -Path ./build/windows/x64/release/godot_doorstop.dll -Destination ./artifacts/verbose/x64/winhttp.dll
+          Copy-Item -Path ./build/windows/x64/release/.godot_doorstop_version -Destination ./artifacts/verbose/x64/.godot_doorstop_version
+          Copy-Item -Path ./build/windows/x86/release/godot_doorstop.dll -Destination ./artifacts/verbose/x86/winhttp.dll
+          Copy-Item -Path ./build/windows/x86/release/.godot_doorstop_version -Destination ./artifacts/verbose/x86/.godot_doorstop_version
+          Copy-Item -Path ./assets/windows/godot_doorstop_config.ini -Destination ./artifacts/verbose/x64/godot_doorstop_config.ini
+          Copy-Item -Path ./assets/windows/godot_doorstop_config.ini -Destination ./artifacts/verbose/x86/godot_doorstop_config.ini
           Copy-Item -Path ./LICENSE -Destination ./artifacts/verbose/LICENSE
       - name: Upload Release
         uses: actions/upload-artifact@v4
         with:
-          name: doorstop_win_release
+          name: godot_doorstop_win_release
           path: artifacts/release
           include-hidden-files: true
       - name: Upload Verbose
         uses: actions/upload-artifact@v4
         with:
-          name: doorstop_win_verbose
+          name: godot_doorstop_win_verbose
           path: artifacts/verbose
           include-hidden-files: true
 
@@ -66,30 +66,30 @@ jobs:
       - name: Build Release
         run: |
           ./build.sh
-          cp build/linux/x86/release/libdoorstop.so artifacts/release/x86/libdoorstop.so
-          cp build/linux/x64/release/libdoorstop.so artifacts/release/x64/libdoorstop.so
-          cp build/linux/x86/release/.doorstop_version artifacts/release/x86/.doorstop_version
-          cp build/linux/x64/release/.doorstop_version artifacts/release/x64/.doorstop_version
+          cp build/linux/x86/release/libgodot_doorstop.so artifacts/release/x86/libgodot_doorstop.so
+          cp build/linux/x64/release/lib_godot_doorstop.so artifacts/release/x64/libgodot_doorstop.so
+          cp build/linux/x86/release/.godot_doorstop_version artifacts/release/x86/.godot_doorstop_version
+          cp build/linux/x64/release/.godot_doorstop_version artifacts/release/x64/.godot_doorstop_version
           cp assets/nix/run.sh artifacts/release/x86/run.sh
           cp assets/nix/run.sh artifacts/release/x64/run.sh
           cp LICENSE artifacts/release/LICENSE
       - name: Build Verbose
         run: |
           ./build.sh -with_logging
-          cp build/linux/x86/release/libdoorstop.so artifacts/verbose/x86/libdoorstop.so
-          cp build/linux/x64/release/libdoorstop.so artifacts/verbose/x64/libdoorstop.so
-          cp build/linux/x64/release/.doorstop_version artifacts/verbose/x86/.doorstop_version
-          cp build/linux/x86/release/.doorstop_version artifacts/verbose/x64/.doorstop_version
+          cp build/linux/x86/release/lib_godot_doorstop.so artifacts/verbose/x86/lib_godot_doorstop.so
+          cp build/linux/x64/release/lib_godot_doorstop.so artifacts/verbose/x64/lib_godot_doorstop.so
+          cp build/linux/x64/release/.godot_doorstop_version artifacts/verbose/x86/.godot_doorstop_version
+          cp build/linux/x86/release/.godot_doorstop_version artifacts/verbose/x64/.godot_doorstop_version
           cp assets/nix/run.sh artifacts/verbose/x86/run.sh
           cp assets/nix/run.sh artifacts/verbose/x64/run.sh
           cp LICENSE artifacts/verbose/LICENSE
       - name: Build Debug
         run: |
           ./build.sh -with_logging -debug
-          cp build/linux/x86/debug/libdoorstop.so artifacts/debug/x86/libdoorstop.so
-          cp build/linux/x64/debug/libdoorstop.so artifacts/debug/x64/libdoorstop.so
-          cp build/linux/x86/debug/.doorstop_version artifacts/debug/x86/.doorstop_version
-          cp build/linux/x64/debug/.doorstop_version artifacts/debug/x64/.doorstop_version
+          cp build/linux/x86/debug/lib_godot_doorstop.so artifacts/debug/x86/lib_godot_doorstop.so
+          cp build/linux/x64/debug/lib_godot_doorstop.so artifacts/debug/x64/lib_godot_doorstop.so
+          cp build/linux/x86/debug/.godot_doorstop_version artifacts/debug/x86/.godot_doorstop_version
+          cp build/linux/x64/debug/.godot_doorstop_version artifacts/debug/x64/.godot_doorstop_version
           cp assets/nix/run.sh artifacts/debug/x86/run.sh
           cp assets/nix/run.sh artifacts/debug/x64/run.sh
           cp LICENSE artifacts/debug/LICENSE
@@ -124,22 +124,22 @@ jobs:
       - name: Build Release
         run: |
           ./build.sh
-          cp build/macosx/universal/release/libdoorstop.dylib artifacts/release/universal/libdoorstop.dylib
-          cp build/macosx/universal/release/.doorstop_version artifacts/release/universal/.doorstop_version
+          cp build/macosx/universal/release/lib_godot_doorstop.dylib artifacts/release/universal/lib_godot_doorstop.dylib
+          cp build/macosx/universal/release/.godot_doorstop_version artifacts/release/universal/.godot_doorstop_version
           cp assets/nix/run.sh artifacts/release/universal/run.sh
           cp LICENSE artifacts/release/LICENSE
       - name: Build Verbose
         run: |
           ./build.sh -with_logging
-          cp build/macosx/universal/release/libdoorstop.dylib artifacts/verbose/universal/libdoorstop.dylib
-          cp build/macosx/universal/release/.doorstop_version artifacts/verbose/universal/.doorstop_version
+          cp build/macosx/universal/release/lib_godot_doorstop.dylib artifacts/verbose/universal/lib_godot_doorstop.dylib
+          cp build/macosx/universal/release/.godot_doorstop_version artifacts/verbose/universal/.godot_doorstop_version
           cp assets/nix/run.sh artifacts/verbose/universal/run.sh
           cp LICENSE artifacts/verbose/LICENSE
       - name: Build Debug
         run: |
           ./build.sh -with_logging -debug
-          cp build/macosx/universal/debug/libdoorstop.dylib artifacts/debug/universal/libdoorstop.dylib
-          cp build/macosx/universal/debug/.doorstop_version artifacts/debug/universal/.doorstop_version
+          cp build/macosx/universal/debug/lib_godot_doorstop.dylib artifacts/debug/universal/lib_godot_doorstop.dylib
+          cp build/macosx/universal/debug/.godot_doorstop_version artifacts/debug/universal/.godot_doorstop_version
           cp assets/nix/run.sh artifacts/debug/universal/run.sh
           cp LICENSE artifacts/debug/LICENSE
       - name: Upload Release
@@ -176,16 +176,16 @@ jobs:
           path: artifacts
       - name: Grab version
         run: |
-          VERSION=$(cat artifacts/doorstop_win_release/x86/.doorstop_version)
+          VERSION=$(cat artifacts/doorstop_win_release/x86/.godot_doorstop_version)
           echo "doorstop_version=$VERSION" >> $GITHUB_ENV
       - name: Create zips
         run: |
           mkdir dist
           cd artifacts
-          zip -r ../dist/doorstop_all_${{ env.doorstop_version }}.zip *
+          zip -r ../dist/doorstop_all_${{ env.godot_doorstop_version }}.zip *
           for dir in *
           do
-            (cd ${dir}; zip -r ../../dist/${dir}_${{ env.doorstop_version }}.zip *)
+            (cd ${dir}; zip -r ../../dist/${dir}_${{ env.godot_doorstop_version }}.zip *)
           done
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest

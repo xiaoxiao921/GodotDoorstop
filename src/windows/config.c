@@ -67,27 +67,8 @@ static inline void init_config_file() {
                    &config.enabled);
     load_bool_file(config_path, TEXT("General"), TEXT("ignore_disable_switch"),
                    TEXT("false"), &config.ignore_disabled_env);
-    load_bool_file(config_path, TEXT("General"), TEXT("redirect_output_log"),
-                   TEXT("false"), &config.redirect_output_log);
     load_path_file(config_path, TEXT("General"), TEXT("target_assembly"),
                    DEFAULT_TARGET_ASSEMBLY, &config.target_assembly);
-    load_path_file(config_path, TEXT("General"), TEXT("boot_config_override"),
-                   NULL, &config.boot_config_override);
-
-    load_str_file(config_path, TEXT("UnityMono"),
-                  TEXT("dll_search_path_override"), TEXT(""),
-                  &config.mono_dll_search_path_override);
-    load_bool_file(config_path, TEXT("UnityMono"), TEXT("debug_enabled"),
-                   TEXT("false"), &config.mono_debug_enabled);
-    load_bool_file(config_path, TEXT("UnityMono"), TEXT("debug_suspend"),
-                   TEXT("false"), &config.mono_debug_suspend);
-    load_str_file(config_path, TEXT("UnityMono"), TEXT("debug_address"),
-                  TEXT("127.0.0.1:10000"), &config.mono_debug_address);
-
-    load_path_file(config_path, TEXT("Il2Cpp"), TEXT("coreclr_path"), NULL,
-                   &config.clr_runtime_coreclr_path);
-    load_path_file(config_path, TEXT("Il2Cpp"), TEXT("corlib_dir"), NULL,
-                   &config.clr_corlib_dir);
 
     free(config_path);
 }
@@ -142,26 +123,8 @@ static inline void init_cmd_args() {
 
     for (int i = 0; i < argc; i++) {
         PARSE_ARG(TEXT("--doorstop-enabled"), config.enabled, load_bool_argv);
-        PARSE_ARG(TEXT("--doorstop-redirect-output-log"),
-                  config.redirect_output_log, load_bool_argv);
         PARSE_ARG(TEXT("--doorstop-target-assembly"), config.target_assembly,
                   load_path_argv);
-        PARSE_ARG(TEXT("--doorstop-boot-config-override"),
-                  config.boot_config_override, load_path_argv);
-
-        PARSE_ARG(TEXT("--doorstop-mono-dll-search-path-override"),
-                  config.mono_dll_search_path_override, load_path_argv);
-        PARSE_ARG(TEXT("--doorstop-mono-debug-enabled"),
-                  config.mono_debug_enabled, load_bool_argv);
-        PARSE_ARG(TEXT("--doorstop-mono-debug-suspend"),
-                  config.mono_debug_suspend, load_bool_argv);
-        PARSE_ARG(TEXT("--doorstop-mono-debug-address"),
-                  config.mono_debug_address, load_str_argv);
-
-        PARSE_ARG(TEXT("--doorstop-clr-corlib-dir"), config.clr_corlib_dir,
-                  load_path_argv);
-        PARSE_ARG(TEXT("--doorstop-clr-runtime-coreclr-path"),
-                  config.clr_runtime_coreclr_path, load_path_argv);
     }
 
     LocalFree(argv);

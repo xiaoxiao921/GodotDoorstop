@@ -1,11 +1,11 @@
 function build_info()
     return {
-        name = "Doorstop",
-        description = ".NET code preloader for Unity",
-        organization = "NeighTools",
+        name = "GodotDoorstop",
+        description = ".NET code preloader for Godot",
+        organization = "iDeathHD",
         version = {
-            major = 4,
-            minor = 5,
+            major = 1,
+            minor = 0,
             patch = 0,
             release = "",
         },
