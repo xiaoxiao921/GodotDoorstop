@@ -14,6 +14,7 @@ Godot Doorstop is a tool to execute managed .NET assemblies inside Godot as earl
 ## Godot runtime support
 
 Godot Doorstop supports executing .NET assemblies in Godot.
+Currently it only extends to Godot games using C# as their scripting language. Godot game that uses GDScript only are not supported right now.
 Godot Doorstop tries to run your assembly as follows:
 
 * Your assembly is executed in the same runtime. As a result
@@ -70,7 +71,7 @@ Debugging is automatically enabled in CoreCLR.
 To start debugging, compile your DLL in debug mode (with embedded or portable symbols) and start the game with the debugger of your choice.  
 Alternatively, attach a debugger to the game once it is running. All standard CoreCLR debuggers should detect the CoreCLR runtime in the game.
 
-Moreover, hot reloading is supported for Visual Studio, Rider and other debuggers with .NET 6 hot reloading feature enabled.
+Moreover, hot reloading is supported for Visual Studio, Rider and other debuggers with .NET hot reloading feature enabled.
 
 ## Doorstop configuration
 
