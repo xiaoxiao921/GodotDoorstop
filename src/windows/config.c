@@ -65,8 +65,6 @@ static inline void init_config_file() {
 
     load_bool_file(config_path, TEXT("General"), TEXT("enabled"), TEXT("true"),
                    &config.enabled);
-    load_bool_file(config_path, TEXT("General"), TEXT("ignore_disable_switch"),
-                   TEXT("false"), &config.ignore_disabled_env);
     load_path_file(config_path, TEXT("General"), TEXT("target_assembly"),
                    DEFAULT_TARGET_ASSEMBLY, &config.target_assembly);
 
@@ -132,18 +130,8 @@ static inline void init_cmd_args() {
 #undef PARSE_ARG
 }
 
-static inline void init_env_vars() {
-    char_t *disable_env = getenv(TEXT("DOORSTOP_DISABLE"));
-    if (!config.ignore_disabled_env && disable_env != 0) {
-        LOG("DOORSTOP_DISABLE is set! Disabling Doorstop!");
-        config.enabled = FALSE;
-    }
-    shutenv(disable_env);
-}
-
 void load_config() {
     init_config_defaults();
     init_config_file();
     init_cmd_args();
-    init_env_vars();
 }

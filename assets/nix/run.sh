@@ -24,21 +24,6 @@ enabled="1"
 # NOTE: The entrypoint must be of format `static void Doorstop.Entrypoint.Start()`
 target_assembly="Doorstop.dll"
 
-# Overrides the default boot.config file path
-boot_config_override=
-
-# If enabled, DOORSTOP_DISABLE env var value is ignored
-# USE THIS ONLY WHEN ASKED TO OR YOU KNOW WHAT THIS MEANS
-ignore_disable_switch="0"
-
-# CoreCLR options (IL2CPP)
-
-# Path to coreclr shared library WITHOUT THE EXTENSION that contains the CoreCLR runtime
-coreclr_path=""
-
-# Path to the directory containing the managed core libraries for CoreCLR (mscorlib, System, etc.)
-corlib_dir=""
-
 ################################################################################
 # Everything past this point is the actual script
 set -e
@@ -206,16 +191,6 @@ doorstop_bool() {
 i=0; max=$#
 while [ $i -lt $max ]; do
     case "$1" in
-        --doorstop_enabled) # For backwards compatibility. Renamed to --doorstop-enabled
-            enabled="$(doorstop_bool "$2")"
-            shift
-            i=$((i+1))
-        ;;
-        --doorstop_target_assembly) # For backwards compatibility. Renamed to --doorstop-target-assembly
-            target_assembly="$2"
-            shift
-            i=$((i+1))
-        ;;
         --doorstop-enabled)
             enabled="$(doorstop_bool "$2")"
             shift
@@ -223,41 +198,6 @@ while [ $i -lt $max ]; do
         ;;
         --doorstop-target-assembly)
             target_assembly="$2"
-            shift
-            i=$((i+1))
-        ;;
-        --doorstop-boot-config-override)
-            boot_config_override="$2"
-            shift
-            i=$((i+1))
-        ;;
-        --doorstop-mono-dll-search-path-override)
-            dll_search_path_override="$2"
-            shift
-            i=$((i+1))
-        ;;
-        --doorstop-mono-debug-enabled)
-            debug_enable="$(doorstop_bool "$2")"
-            shift
-            i=$((i+1))
-        ;;
-        --doorstop-mono-debug-suspend)
-            debug_suspend="$(doorstop_bool "$2")"
-            shift
-            i=$((i+1))
-        ;;
-        --doorstop-mono-debug-address)
-            debug_address="$2"
-            shift
-            i=$((i+1))
-        ;;
-        --doorstop-clr-runtime-coreclr-path)
-            coreclr_path="$2"
-            shift
-            i=$((i+1))
-        ;;
-        --doorstop-clr-corlib-dir)
-            corlib_dir="$2"
             shift
             i=$((i+1))
         ;;
@@ -274,10 +214,6 @@ target_assembly="$(abs_path "$target_assembly")"
 # Move variables to environment
 export DOORSTOP_ENABLED="$enabled"
 export DOORSTOP_TARGET_ASSEMBLY="$target_assembly"
-export DOORSTOP_BOOT_CONFIG_OVERRIDE="$boot_config_override"
-export DOORSTOP_IGNORE_DISABLED_ENV="$ignore_disable_switch"
-export DOORSTOP_CLR_RUNTIME_CORECLR_PATH="$coreclr_path.$lib_extension"
-export DOORSTOP_CLR_CORLIB_DIR="$corlib_dir"
 
 # Final setup
 doorstop_directory="${BASEDIR}/"

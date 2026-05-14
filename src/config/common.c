@@ -17,6 +17,5 @@ void cleanup_config() {
 
 void init_config_defaults() {
     config.enabled = FALSE;
-    config.ignore_disabled_env = FALSE;
     config.target_assembly = NULL;
 }

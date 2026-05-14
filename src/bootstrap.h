@@ -9,11 +9,4 @@ int hook_hostfxr_get_runtime_delegate(
     enum hostfxr_delegate_type type,
     /*out*/ void **delegate);
 
-int hook_coreclr_create_delegate(void *hostHandle,
-    unsigned int domainId,
-    const char *entryPointAssemblyName,
-    const char *entryPointTypeName,
-    const char *entryPointMethodName,
-    void **delegate);
-
 #endif
