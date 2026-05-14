@@ -60,12 +60,10 @@ int CORECLR_DELEGATE_CALLTYPE hook_load_assembly_and_get_function_pointer(
         reserved,
         delegate);
 
-    LOG("load_assembly_and_get_function_pointer res: 0x%08x", res);
+    LOG("g_load_assembly_and_get_function_pointer_orig res: 0x%08x", res);
 
     return res;
 }
-
-bool_t runtime_props_patched = FALSE;
 
 int hook_hostfxr_get_runtime_delegate(
     hostfxr_handle host_context_handle,
