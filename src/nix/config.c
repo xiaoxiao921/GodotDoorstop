@@ -31,11 +31,9 @@ void get_env_path(const char_t *name, char_t **target) {
 
 void load_config() {
     get_env_bool("DOORSTOP_ENABLED", &config.enabled);
-    get_env_bool("DOORSTOP_IGNORE_DISABLED_ENV", &config.ignore_disabled_env);
     get_env_path("DOORSTOP_TARGET_ASSEMBLY", &config.target_assembly);
 
     //Print out all the relevant configuration settings using LOG()
     LOG("DOORSTOP_ENABLED: %d", config.enabled);
-    LOG("DOORSTOP_IGNORE_DISABLED_ENV: %d", config.ignore_disabled_env);
     LOG("DOORSTOP_TARGET_ASSEMBLY: %s", config.target_assembly);
 }
